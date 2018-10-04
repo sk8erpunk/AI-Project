@@ -1,0 +1,112 @@
+==============================================================================================
+Experiments Guide
+==============================================================================================
+Introduction:
+In this file we explain how to run experiments in our project.
+Here is a list of a different experiments that can be done:
+1. Clustering algorithm experiments.
+2. Citrus experiments.
+3. Perfoming T-SNE visualizations
+
+The following sections describe in detail how to perform each one of them in order. 
+==============================================================================================
+1. Clustering Algorithm Experiments
+==============================================================================================
+In this section we perform experiments based on the clustering algorithm. 
+
+A. To perform an experiment:
+	1) Open command line (cmd) in the project folder.
+	2) Run script "main.py" with the following parameters:
+		python main.py cluster --sample_size [sample_size]
+							   --min_cells min_cells [min_cells]
+							   --min_entropy min_entropy [min_entropy]
+							   --k_fold k_fold [k_fold]
+							   
+		E.g.:
+		python main.py cluster --sample_size 50000 --min_cells 20000 100000 --min_entropy 0.01 0.1 0.3 0.5 --k_fold 2 4 5 8 10 20
+		
+		Parameters info:
+		- sample_size: int. Must be between [1,	70000]. 
+		- min_cells: Array of int. Should be 1% or 5% of 40*sample_size (40 Patients).
+		- min_entropy: Array of floats. Must be between [0,1].
+		- k_fold: Array of int. Must be dividers of 40.
+
+
+Results Locations:
+AI_Project\results\clustering_algorithm_results 
+-----------------------------------------------------------------------------------------------
+Warning 1: Our experiments were conducted on a super computer because the algorithm takes a lot 
+of time to finish when given a big value of sample_size. 
+Please use a very low values of sample_size and min_cells if you want to get a fast result.
+-----------------------------------------------------------------------------------------------
+Warning 2: During the run you will see a lot of message prints, please ignore them.
+To see a better view of the results perform the script in the script in section 1.B.  
+-----------------------------------------------------------------------------------------------
+
+B. To summarize the experiments results: 
+	1) Open command line in project folder.
+	2) Run script "process_results.py":
+		python process_results.py
+
+Results Locations:
+AI_Project\results\experiments_summary
+
+
+==============================================================================================
+2. Citrus Experiments
+==============================================================================================
+In this section we show citrus results given fold sizes.
+Citrus data location: AI_project\citrus_data\abundancesLeafs.csv
+
+To perform an experiment:
+	1) Open command line in the project folder.
+	2) Run script "main.py" with the following parameter:
+		python main.py citrus --k_fold k_fold [k_fold]
+		
+		E.g.:
+		python main.py citrus --k_fold 2 4 5 8 10 20
+		
+		Parameter info:
+		- k_fold: Array of int. Must be dividers of 40.
+
+Results Locations:
+AI_Project\results\citrus_results
+
+
+==============================================================================================
+3. T-SNE Visualizations 
+==============================================================================================
+In this section, we visualize our clusters in 2D graphs using the T-SNE technique.
+First you must download the zip folder "our_results.zip" which contains the results:
+---------------------------------------------------------------------------------
+Download link: https://drive.google.com/open?id=1WNxiDJ0n_CLop8z1L4RIfZNuYmA6pmyi
+---------------------------------------------------------------------------------
+Unzip and copy the folder "our_results" to: AI_Project\results (Like this: AI_Project\results\our_results)
+ 
+To perform a visualization of the clusters:
+	1) Open command line in the project folder.
+	2) Run script "analyze_results.py" with the following parameter:
+		python analyze_results.py [exisiting_exp_name]
+		
+		E.g.:
+		python analyze_results.py sample_size_50000_min_ent_0.1_min_cells_20000
+		
+		Parameter info:
+		- exisiting_exp_name: String. Must be one of our 8 experiments (AI_Project\results\our_results\clustering_algorithm_results).
+
+Results Locations:
+AI_Project\results\tsne_results
+-----------------------------------------------------------------------------------------------
+Notice: T-SNE accepts two important parameters:
+a. perplexity
+b. learning_rate
+Default values were set in the code, but usually they are adjusted by the user to fit the data. 
+-----------------------------------------------------------------------------------------------
+
+
+==============================================================================================
+Authors
+==============================================================================================
+Lorraine Ramel		sk8er@campus.technion.ac.il
+Nikita Dizur		snikdizh@campus.technion.ac.il
+Atalya Alon		atalya.u@gmail.com
